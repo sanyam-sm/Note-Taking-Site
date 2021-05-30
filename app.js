@@ -1,11 +1,25 @@
 console.log("welocme to notes app")
 showNotes();
 //If a user add a note, add it to local storage
-let addBtn = document.getElementById("addbtn")
-addBtn.addEventListener("click", function (e) {
+// Adding a title option
 
+let addBtn = document.getElementById("addbtn");
+addBtn.addEventListener("click", function (e) {
     let addTxt = document.getElementById("addTxt")
     let notes = localStorage.getItem("notes");
+    let addTitle = document.getElementById("addTitle");
+    let title = localStorage.getItem("title")
+
+    if (title == null) {
+        titleObj = [];     
+    }
+    else{
+        titleObj = JSON.parse(title);
+    }
+    titleObj.push(addTitle.value);
+    localStorage.setItem("title", JSON.stringify(titleObj));
+    addTitle.value = "";
+    console.log(titleObj)
 
     if (notes == null) {
         notesObj = [];
@@ -90,4 +104,3 @@ search.addEventListener("input",function () {
     })
 })
 
-// Search option is yet to fix
